@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  GDriveFileDeleteLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: GDriveFileDelete
+      Handler: app.lambda_handler  # Update to match ReceiptPlacer/app.py
+      CodeUri: GDriveFileDelete/  # Point to the directory containing app.py
+      Runtime: python3.12
+      Timeout: 30
+      MemorySize: 128
+      Role: !GetAtt GDriveFileDeleteRole.Arn
+      Environment:
+        Variables:
+          SECRET_NAME: "google_drive_api"
+          REGION_NAME: "us-east-1"
+          FOLDER_ID:
+          TARGET_FOLDER_ID:
+
+  GDriveFileDeleteRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: GDriveFileDeleteRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: GDriveFileDeleteSecretsAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: "secretsmanager:GetSecretValue"
+                Resource:
+                  - !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:google_drive_api-*"
+
+Outputs:
+  GDriveFileDeleteLambdaFunction:
+    Description: "Lambda Function ARN"
+    Value: !GetAtt GDriveFileDeleteLambda.Arn
