@@ -21,6 +21,7 @@
 .AppleDouble
 .LSOverride
 ./.venv
+./.idea
 # Icon must end with two \r
 Icon
 
