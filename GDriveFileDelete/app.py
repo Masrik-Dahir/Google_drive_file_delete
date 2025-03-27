@@ -115,8 +115,3 @@ def lambda_handler(event, context):
             "totalItemsFound": len(items)
         })
     }
-
-# Example test invocation:
-# if __name__ == "__main__":
-#     test_event = {"FOLDER_ID": "1-wmH0wnPfOtx4LlBJG9hodWpSi0Hvj7K", "TARGET_FOLDER_ID": "11T856S4Jf7tWdMdKZ5p6Dt2BEgvvfXwN"}
-#     print(lambda_handler(test_event, None))
