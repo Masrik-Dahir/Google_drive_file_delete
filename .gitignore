@@ -245,3 +245,11 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
 # Project exclude paths
 /.aws-sam/
+/.idea/.gitignore
+/.idea/aws.xml
+/.idea/Google_drive_file_delete.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
